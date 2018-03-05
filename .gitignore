@@ -1,0 +1,16 @@
+*.annot
+*.cmo
+*.cma
+*.cmi
+*.a
+*.o
+*.cmx
+*.cmxs
+*.cmxa
+
+# dune working dir
+_build/
+
+# auto generated files
+*.install
+*.merlin
