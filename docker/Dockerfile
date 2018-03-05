@@ -8,7 +8,9 @@ RUN apt-get install -qy opam
 RUN apt-get install -qy m4
 RUN opam init --comp=4.05.0
 
-RUN opam install jbuilder
+RUN opam install --yes jbuilder
+RUN opam install --yes menhir sedlex
+RUN opam install --yes core
 
 # opam path setting
 RUN echo "eval `opam config env`" > ~/.bashrc
