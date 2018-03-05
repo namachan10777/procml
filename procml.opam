@@ -1,0 +1,11 @@
+opam-version: "1.2"
+maintainer: "namachan10777@gmail.com"
+authors: ["Nakano Masaki"]
+homepage: "https://github.com/namachan10777/procml"
+bug-reports: "https://github/namachan10777/procml/issues"
+dev-repo: "https://github.com/namachan10777/procml"
+license: "BSL-1.0"
+build: [[ "jbuilder" "build" "--only-packages" "%{name}%" "--root" "." "-j" jobs "@install" ]]
+depends: [
+	"jbuilder" {build}
+]
