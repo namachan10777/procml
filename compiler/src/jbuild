@@ -7,3 +7,7 @@
 (install
 	((section bin)
 	 (files ((main.exe as procc)))))
+
+(menhir
+	((flags (--explain))
+	(modules (parser))))
