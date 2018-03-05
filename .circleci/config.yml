@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: namachan10777/procml:latest
+
+    working_directory: /ci
+
+    steps:
+      - checkout
+      - run:
+          name: build
+          command: jbuilder build
