@@ -28,14 +28,14 @@ let update lexbuf =
 
 let lexeme {stream} = Sedlexing.Utf8.lexeme stream
 
-exception ParseError of (string * int * int * string)
+exception ParseError of (string * int * int * string * string)
 
-let raise_ParseError lexbuf =
+let raise_ParseError lexbuf msg =
 	let {pos} = lexbuf in
 	let line = pos.pos_bol in
 	let col = pos.pos_cnum - pos.pos_bol in
 	let tok = lexeme lexbuf in
-	raise (ParseError (pos.pos_fname, line, col, tok))
+	raise (ParseError (pos.pos_fname, line, col, tok, msg))
 
 let num = [%sedlex.regexp? '0'..'9']
 let interger = [%sedlex.regexp? Plus num]
@@ -137,7 +137,7 @@ let rec lex lexbuf =
 		Parser.EOF
 	| _ ->
 		update lexbuf;
-		raise_ParseError lexbuf
+		raise_ParseError lexbuf "unexpected charcter"
 and comment lexbuf =
 	let buf = lexbuf.stream in
 	match%sedlex buf with
@@ -149,9 +149,9 @@ and comment lexbuf =
 		update lexbuf;
 		()
 	| eof ->
-		raise_ParseError lexbuf
+		raise_ParseError lexbuf "unterminated comment"
 	| any ->
 		update lexbuf;
 		comment lexbuf
 	| _ ->
-		raise_ParseError lexbuf
+		raise_ParseError lexbuf "no way!"
