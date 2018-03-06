@@ -51,7 +51,86 @@ let rec lex lexbuf =
 	| '\n' ->
 		update lexbuf; new_line lexbuf;
 		lex lexbuf
+	| white_space ->
+		update lexbuf;
+		lex lexbuf
+	| interger ->
+		update lexbuf;
+		Parser.Interger (lexbuf |> lexeme |> int_of_string)
+	| floating ->
+		update lexbuf;
+		Parser.Floating (lexbuf |> lexeme |> float_of_string)
+	| "true" ->
+		update lexbuf;
+		Parser.Boolean true
+	| "false" ->
+		update lexbuf;
+		Parser.Boolean false
+	| string ->
+		update lexbuf;
+		let value =
+			lexbuf
+			|> lexeme
+			|> fun s -> Core.String.drop_prefix s 1
+			|> fun s -> Core.String.drop_suffix s 1
+		in Parser.String value
+	| symbol ->
+		update lexbuf;
+		Parser.Symbol (lexbuf |> lexeme)
+	| typevar ->
+		update lexbuf;
+		Parser.Symbol (lexbuf |> lexeme)
+	| "let" ->
+		update lexbuf;
+		Parser.Let
+	| "infixr" ->
+		update lexbuf;
+		Parser.Infixr
+	| "infixl" ->
+		update lexbuf;
+		Parser.Infixl
+	| "in" ->
+		update lexbuf;
+		Parser.In
+	| "case" ->
+		update lexbuf;
+		Parser.Case
+	| "of" ->
+		update lexbuf;
+		Parser.Of
+	| "end" ->
+		update lexbuf;
+		Parser.End
+	| "Fn" ->
+		update lexbuf;
+		Parser.Fn
+	| "As" ->
+		update lexbuf;
+		Parser.As
+	| "(" ->
+		update lexbuf;
+		Parser.LParen
+	| ")" ->
+		update lexbuf;
+		Parser.RParen;
+	| "=" ->
+		update lexbuf;
+		Parser.Eq
+	| "->" ->
+		update lexbuf;
+		Parser.Arrow
+	| "*" ->
+		update lexbuf;
+		Parser.Star
+	| "|" ->
+		update lexbuf;
+		Parser.VBar
+	| "." ->
+		update lexbuf;
+		Parser.Periodo
+	| eof ->
+		update lexbuf;
+		Parser.EOF
 	| _ ->
 		update lexbuf;
 		raise_ParseError lexbuf
-
