@@ -128,9 +128,30 @@ let rec lex lexbuf =
 	| "." ->
 		update lexbuf;
 		Parser.Periodo
+	| "(*" ->
+		update lexbuf;
+		comment lexbuf;
+		lex lexbuf
 	| eof ->
 		update lexbuf;
 		Parser.EOF
 	| _ ->
 		update lexbuf;
+		raise_ParseError lexbuf
+and comment lexbuf =
+	let buf = lexbuf.stream in
+	match%sedlex buf with
+	| "(*" ->
+		update lexbuf;
+		comment lexbuf;
+		comment lexbuf;
+	| "*)" ->
+		update lexbuf;
+		()
+	| eof ->
+		raise_ParseError lexbuf
+	| any ->
+		update lexbuf;
+		comment lexbuf
+	| _ ->
 		raise_ParseError lexbuf

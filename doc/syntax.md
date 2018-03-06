@@ -43,5 +43,6 @@ variant_pattern ::= variable, pattern
        funtype ::= type, '->', type
           type ::= variable | tuple_type | variant_type | funtype | '(', type, ')'
 
+       comment ::= '(*' (comment | {{all charcters}* - "*)"})* '*)'
        program ::= (let_stmt | type_stmt)*
 ```
