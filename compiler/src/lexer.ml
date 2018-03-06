@@ -14,7 +14,7 @@ let create_lexbuf file stream =
 let new_line lexbuf =
 	let open Lexing in
 	let lcp = lexbuf.pos in
-	lexbuf,pos <-
+	lexbuf.pos <-
 		{
 			lcp with
 			pos_lnum = lcp.pos_lnum + 1;
