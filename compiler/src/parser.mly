@@ -9,7 +9,7 @@
 %token Fn
 %token As
 %token LParen RParen
-%token Eq Arrow Star VBar Periodo
+%token Eq Arrow Star VBar Periodo Comma
 %token EOF
 
 %start program

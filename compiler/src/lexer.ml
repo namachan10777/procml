@@ -128,6 +128,9 @@ let rec lex lexbuf =
 	| "." ->
 		update lexbuf;
 		Parser.Periodo
+	| "," ->
+		update lexbuf;
+		Parser.Comma
 	| "(*" ->
 		update lexbuf;
 		comment lexbuf;
