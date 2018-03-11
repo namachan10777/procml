@@ -20,10 +20,10 @@
 %token EOF
 
 %start program
-%type<'a list> program
+%type<Syntax.t> program
 
 %%
 
 program:
 | EOF
-	{ [] }
+	{ stmt_dummy }
