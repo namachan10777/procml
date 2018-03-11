@@ -41,6 +41,7 @@ variant_pattern ::= variable, pattern
   variant_pair ::= symbol, 'of', type
   variant_type ::= variant_pair, ('|', variant_pair)*
        funtype ::= type, '->', type
+       typeapp ::= type, type
           type ::= variable | tuple_type | variant_type | funtype | '(', type, ')'
 
        comment ::= '(*' (comment | {{all charcters}* - "*)"})* '*)'
