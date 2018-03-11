@@ -1,3 +1,10 @@
+%{
+	let exp_dummy = Syntax.EId (("This is dummy", "This is dummy") :: [])
+	let pat_dummy = Syntax.PId (("This is dummy", "This is dummy") :: [])
+	let type_dummy = Syntax.TId (("This is dummy", "This is dummy") :: [])
+	let stmt_dummy = Syntax.SLet (("This is dummy", "This is dummy"), exp_dummy)
+%}
+
 %token<int> Interger
 %token<float> Floating
 %token<bool> Boolean
