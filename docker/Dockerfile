@@ -11,6 +11,7 @@ RUN opam init --comp=4.05.0
 RUN opam install --yes jbuilder
 RUN opam install --yes menhir sedlex
 RUN opam install --yes core
+RUN opam install --yes ppx_deriving
 
 # opam path setting
 RUN echo "eval `opam config env`" > ~/.bashrc
